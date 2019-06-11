@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars is Cool</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .box {
+      padding: 20x;
+      margin-top: 10px;
+      color: #303030;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .purple {
+      background: lavender;
+    }
+
+    .red {
+      background: #F7A492;
+    }
+
+    .responsive-img {
+      width: 90%;
+      height: auto;
+      max-width: 350px;
+      padding-right: 15px;
+      padding-bottom: 15px;
+    }
+
+    .responsive-img-sm {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+    }
+
+    .img-fluid {
+      max-width: 100%;
+      height: auto;
+      padding: 15px;
+    }
+
+    .img-border {
+      border: 3px solid #303030;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="jumbotron text-center">
+      <h1>Mars</h1>
+      <h2>News About the Red Planet</h2>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape for News</a></p>
+    </div>
+
+    <!-- mars_dict = {
+      "news_title": news_title,
+      "news_p":news_p,
+      "news_image":news_img,
+      "feat_img_url":feat_img_url,
+      "mars_weather":mars_weather,
+      "mars_facts":html_table} -->
+    <div class="row">
+
+      <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="box purple">
+          <center>
+            <h1>Latest Mars News</h1>
+            <h2>{{mars_data.news_title}}</h2>
+            <p>{{mars_data.news_p}}</p>
+            <p>{{mars_data.news_img}}</p>
+          </center>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-6 col-sm-12">
+          <div class="box red">
+            <center>
+              <h2>Mars Weather</h2>
+              <p>{{mars_data.mars_weather}}</p>
+            </center>
+          </div>
+          <div class="col-md-12 col-lg-12 col-sm-12 other">
+              <div class="box red">
+                <center>
+                  <h2>Featured Image of Mars</h2>
+                  <p>{{mars_data.feat_img_url}}</p>
+                </center>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 col-sm-12">
+          <div class="box red">
+            <center>
+              <h2>Mars Facts</h2>
+              <p>{{mars_data.html_table | safe}}</p>
+            </center>
+          </div>
+          
+        </div>
+      </div>
+</body>
+
+</html>
