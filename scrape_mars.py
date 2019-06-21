@@ -46,23 +46,22 @@ def scrape():
     html_table = df.to_html(header=False,index=False).replace('\n', '')
     html_table = html_table.replace('\n', '')
 
-
-    # url_hemi = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
-    # soup_hemi = bs(requests.get(url_hemi).text,'html.parser')
-    # hemisphere_data = []
-    # products = soup_hemi.find("div", class_ = "result-list" )
-    # hemispheres = products.find_all("div", class_="item")
-    # for hemisphere in hemispheres:
-    #     title = hemisphere.find("h3").text
-    #     title = title.replace("Enhanced", "")
-    #     end_link = hemisphere.find("a")["href"]
-    #     image_link = "https://astrogeology.usgs.gov/" + end_link    
-    #     browser.get(image_link)
-    #     html = browser.html
-    #     soup=bs(html, "html.parser")
-    #     downloads = soup.find("div", class_="downloads")
-    #     image_url = downloads.find("a")["href"]
-    #     hemisphere_data.append({"title": title, "img_url": image_url})
+    url_hemi = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    soup_hemi = bs(requests.get(url_hemi).text,'html.parser')
+    hemisphere_data = []
+    results = soup_hemi.find("div", class_ = "result-list" )
+    hemispheres = products.find_all("div", class_="item")
+    for hemisphere in hemispheres:
+        title = hemisphere.find("h3").text
+        title = title.replace("Enhanced", "")
+        end_link = hemisphere.find("a")["href"]
+        image_link = "https://astrogeology.usgs.gov/" + end_link    
+        browser.get(image_link)
+        html = browser.html
+        soup=bs(html, "html.parser")
+        downloads = soup.find("div", class_="downloads")
+        image_url = downloads.find("a")["href"]
+        hemisphere_data.append({"title": title, "img_url": image_url})
 
     mars_dict = {
     "news_title": news_title,
