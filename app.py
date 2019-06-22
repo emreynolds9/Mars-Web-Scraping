@@ -5,10 +5,7 @@ from flask_pymongo import PyMongo
 # Create flask app
 app = Flask(__name__)
 
-# Connect to MongoDB
-# client = pymongo.MongoClient()
-# db = client.mars_db
-# collection = db.mars_coll
+
 mongo = PyMongo(app, uri="mongodb://localhost:27017/weather_app")
 
 # Create root/index route to query mongoDB and pass mars data to HTML template to display data

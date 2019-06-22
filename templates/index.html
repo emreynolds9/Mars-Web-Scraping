@@ -67,7 +67,6 @@
       "mars_weather":mars_weather,
       "mars_facts":html_table} -->
     <div class="row">
-
       <div class="col-md-6 col-lg-6 col-sm-12">
         <div class="box purple">
           <center>
@@ -87,24 +86,50 @@
             </center>
           </div>
           <div class="col-md-12 col-lg-12 col-sm-12 other">
-              <div class="box red">
-                <center>
-                  <h2>Featured Image of Mars</h2>
-                  <p>{{mars_data.feat_img_url}}</p>
-                </center>
-              </div>
+            <div class="box red">
+              <center>
+                <h2>Featured Image of Mars</h2>
+                <p>{{mars_data.feat_img_url}}</p>
+              </center>
             </div>
-        </div>
-        <div class="col-md-6 col-lg-6 col-sm-12">
-          <div class="box red">
-            <center>
-              <h2>Mars Facts</h2>
-              <p>{{mars_data.html_table | safe}}</p>
-            </center>
           </div>
-          
+    
+      </div>
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <div class="box red">
+          <center>
+            <h2>Mars Facts</h2>
+            <p>{{mars_data.html_table | safe}}</p>
+          </center>
         </div>
       </div>
+      <div class="container">
+        <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+          <div class="box purple">
+              <div class="col-6">
+                {{mars_data.hemi_data[0]["title"]}}
+                <img src="{{ mars_data.hemi_data[0]["img_url"] }}" class="responsive-img-sm">
+              </div>
+              <div class="col-6 other">
+                {{mars_data.hemi_data[1]["title"]}}
+                <img src="{{ mars_data.hemi_data[1]["img_url"] }}" class="responsive-img-sm">
+                <div class="col-6 other">
+                    {{mars_data.hemi_data[2]["title"]}}
+                    <img src="{{ mars_data.hemi_data[2]["img_url"] }}" class="img-fluid">
+                    <div class="col-6 other">
+                        {{mars_data.hemi_data[3]["title"]}}
+                        <img src="{{ mars_data.hemi_data[3]["img_url"] }}" class="img-fluid">
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
 </body>
 
 </html>

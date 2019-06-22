@@ -26,6 +26,7 @@ def scrape():
     news_img = soup_news.find('div',class_="content_title")
     news_img = "https://mars.nasa.gov"+soup_news.find('img',class_="img-lazy")["data-lazy"]
     news_p = soup_news.find('div',class_="article_teaser_body").text
+
     
     browser = webdriver.Chrome()
     browser.get('https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars')
@@ -49,19 +50,14 @@ def scrape():
     url_hemi = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     soup_hemi = bs(requests.get(url_hemi).text,'html.parser')
     hemisphere_data = []
-    results = soup_hemi.find("div", class_ = "result-list" )
-    hemispheres = products.find_all("div", class_="item")
-    for hemisphere in hemispheres:
-        title = hemisphere.find("h3").text
-        title = title.replace("Enhanced", "")
-        end_link = hemisphere.find("a")["href"]
-        image_link = "https://astrogeology.usgs.gov/" + end_link    
-        browser.get(image_link)
-        html = browser.html
-        soup=bs(html, "html.parser")
-        downloads = soup.find("div", class_="downloads")
-        image_url = downloads.find("a")["href"]
-        hemisphere_data.append({"title": title, "img_url": image_url})
+    results = soup_hemi.findAll("a", {'class':['itemLink', 'product-item']})
+    for result in results:
+        end_link = result["href"]
+        url_hemi_each = "https://astrogeology.usgs.gov"+end_link
+        soup_hemi_each = bs(requests.get(url_hemi_each).text,'html.parser')
+        img_url = soup_hemi_each.findAll("div",class_="downloads")[0].find("a")["href"]
+        title = soup_hemi_each.findAll("div",class_="content")[0].find("h2").text
+        hemisphere_data.append({"title":title,"img_url":img_url})
 
     mars_dict = {
     "news_title": news_title,
@@ -69,8 +65,8 @@ def scrape():
     "news_img":news_img,
     "feat_img_url":feat_img_url,
     "mars_weather":mars_weather,
-    "html_table":html_table}
-    # "hemi_data":hemi_data}
+    "html_table":html_table,
+    "hemi_data":hemisphere_data}
 
     browser.close
 
