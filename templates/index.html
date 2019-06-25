@@ -6,22 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mars is Cool</title>
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
   <style>
     .box {
-      padding: 20x;
-      margin-top: 10px;
+      min-height: 50px;
+      padding: 20px;
+      margin-top: 20px;
       color: #303030;
       font-family: Arial, Helvetica, sans-serif;
     }
 
     .purple {
       background: lavender;
-    }
-
-    .red {
-      background: #F7A492;
     }
 
     .responsive-img {
@@ -39,7 +37,7 @@
     }
 
     .img-fluid {
-      max-width: 100%;
+      max-width: 90%;
       height: auto;
       padding: 15px;
     }
@@ -56,16 +54,12 @@
     <div class="jumbotron text-center">
       <h1>Mars</h1>
       <h2>News About the Red Planet</h2>
+      <h3>
+        This Flask application scrapes data from various websites about Mars and aggregates it into a webpage.
+      </h3>
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape for News</a></p>
     </div>
 
-    <!-- mars_dict = {
-      "news_title": news_title,
-      "news_p":news_p,
-      "news_image":news_img,
-      "feat_img_url":feat_img_url,
-      "mars_weather":mars_weather,
-      "mars_facts":html_table} -->
     <div class="row">
       <div class="col-md-6 col-lg-6 col-sm-12">
         <div class="box purple">
@@ -79,57 +73,77 @@
       </div>
       <div class="row">
         <div class="col-md-6 col-lg-6 col-sm-12">
-          <div class="box red">
+          <div class="box purple">
             <center>
               <h2>Mars Weather</h2>
               <p>{{mars_data.mars_weather}}</p>
             </center>
           </div>
           <div class="col-md-12 col-lg-12 col-sm-12 other">
-            <div class="box red">
+            <div class="box purple">
               <center>
-                <h2>Featured Image of Mars</h2>
-                <p>{{mars_data.feat_img_url}}</p>
+                <h2><a href = {{mars_data.feat_img_url}}>Featured Image of Mars</a></h2>
               </center>
             </div>
           </div>
-    
-      </div>
-      <div class="col-md-6 col-lg-6 col-sm-12">
-        <div class="box red">
-          <center>
-            <h2>Mars Facts</h2>
-            <p>{{mars_data.html_table | safe}}</p>
-          </center>
+
         </div>
-      </div>
-      <div class="container">
-        <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="col-md-6 col-lg-6 col-sm-12">
           <div class="box purple">
-              <div class="col-6">
-                {{mars_data.hemi_data[0]["title"]}}
-                <img src="{{ mars_data.hemi_data[0]["img_url"] }}" class="responsive-img-sm">
-              </div>
-              <div class="col-6 other">
-                {{mars_data.hemi_data[1]["title"]}}
-                <img src="{{ mars_data.hemi_data[1]["img_url"] }}" class="responsive-img-sm">
-                <div class="col-6 other">
-                    {{mars_data.hemi_data[2]["title"]}}
-                    <img src="{{ mars_data.hemi_data[2]["img_url"] }}" class="img-fluid">
-                    <div class="col-6 other">
-                        {{mars_data.hemi_data[3]["title"]}}
-                        <img src="{{ mars_data.hemi_data[3]["img_url"] }}" class="img-fluid">
+            <center>
+              <h2>Mars Facts</h2>
+              <p>{{mars_data.html_table | safe}}</p>
+            </center>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+              <div class="box purple">
+                <table style="width: 100%">
+                  <tr>
+                    <td>
+                      <center>
+                        <h2>
+                          {{mars_data.hemi_data[0]["title"]}}
+                        </h2>
+                        <img src="{{ mars_data.hemi_data[0]["img_url"] }}" class="img-fluid">
+                      </center>
+                    </td>
+                    <td>
+                      <center>
+                        <h2>
+                          {{mars_data.hemi_data[1]["title"]}}
+                        </h2>
+                        <img src="{{ mars_data.hemi_data[1]["img_url"] }}" class="img-fluid">
+                      </center>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <center>
+                        <h2>
+                          {{mars_data.hemi_data[2]["title"]}}
+
+                        </h2>
+                        <img src="{{ mars_data.hemi_data[2]["img_url"] }}" class="img-fluid">
+                      </center>
+                    </td>
+                    <td>
+                      <center>
+                        <h2>
+                          {{mars_data.hemi_data[3]["title"]}}
+
+                        </h2>
+                      </center>
+                      <img src="{{ mars_data.hemi_data[3]["img_url"] }}" class="img-fluid">
+                    </td>
+                  </tr>
+                </table>
               </div>
             </div>
-
-
           </div>
-
         </div>
-
-      </div>
-    </div>
 </body>
 
 </html>
