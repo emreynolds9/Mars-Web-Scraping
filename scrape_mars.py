@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import pandas as pd
 import time
+import datetime
 
 def init_browser():
     executable_path = {"executable_path": "chromedriver.exe"}
@@ -15,6 +16,7 @@ def init_browser():
 # return one Python dictionary containing all of the scraped data
 
 def scrape():
+    date_time = datetime.datetime.now()
     browser = init_browser()
     mars_dict = {}
 
@@ -22,12 +24,17 @@ def scrape():
     browser.visit(url_news)
     html=browser.html
     soup_news = bs(html,'html.parser')
-    news_title = soup_news.find('div',class_="content_title").find('a').get_text(strip=True)
-    news_img = soup_news.find('div',class_="content_title")
-    news_img = "https://mars.nasa.gov"+soup_news.find('img',class_="img-lazy")["data-lazy"]
-    news_p = soup_news.find('div',class_="article_teaser_body").text
+    #Title
+    news_title =soup_news.find('div',class_="image_and_description_container").find('h3').text
+    #Image
+    news_img = soup_news.find('div',class_="list_image").find('img')['src']
+    news_img = "https://mars.nasa.gov"+news_img
+    #Date
+    news_date = soup_news.find('div',class_="image_and_description_container").find('div',class_='list_date').text
+    #Paragraph Text
+    news_p = soup_news.find('div',class_="image_and_description_container").find('div',class_="rollover_description_inner").text
 
-    
+
     browser = webdriver.Chrome()
     browser.get('https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars')
     elm = browser.find_element_by_xpath('//*[@id="full_image"]')
@@ -43,8 +50,8 @@ def scrape():
     url_facts = 'https://space-facts.com/mars'
     tables = pd.read_html(url_facts)
     df=tables[0]
-    df.columns = ['Characteristic', 'Fact']
-    html_table = df.to_html(header=False,index=False).replace('\n', '')
+    df.columns = ['Characteristic', 'Mars',"Earth"]
+    html_table = df.to_html(header=True,index=False, classes='table table-striped').replace('\n', '')
     html_table = html_table.replace('\n', '')
 
     url_hemi = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
@@ -63,10 +70,12 @@ def scrape():
     "news_title": news_title,
     "news_p":news_p,
     "news_img":news_img,
+    "news_date":news_date,
     "feat_img_url":feat_img_url,
     "mars_weather":mars_weather,
     "html_table":html_table,
-    "hemi_data":hemisphere_data}
+    "hemisphere_data":hemisphere_data,
+    "date_time":date_time,}
 
     browser.close
 
