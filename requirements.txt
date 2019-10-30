@@ -1,6 +1,5 @@
 beautifulsoup4==4.8.0
 bs4==0.0.1
-bson
 certifi==2019.9.11
 chardet==3.0.4
 citipy==0.0.5

@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect
 # from flask_pymongo import PyMongo
 import os
 import json
-from bson import json_util
+# from bson import json_util
 
 app = Flask(__name__)
 
@@ -25,7 +25,7 @@ def scrape():
     mars_dict = scrape_mars.scrape()
 
     with open('result.json', 'w') as fp:
-        json.dump(mars_dict, fp, default=json_util.default)
+        json.dump(mars_dict, fp)
 
     #update the mongo database using update and upsert=True
     # mongo.db.collection.update({}, mars_dict, upsert=True)
