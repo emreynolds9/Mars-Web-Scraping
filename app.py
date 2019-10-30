@@ -1,10 +1,13 @@
 import scrape_mars
 from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
+import os
+import json
+from bson import json_util
 
-# Create flask app
+
+
 app = Flask(__name__)
-
 
 mongo = PyMongo(app, uri="mongodb://localhost:27017/mars")
 
@@ -19,6 +22,9 @@ def index():
 def scrape():
     #run the scrape function
     mars_dict = scrape_mars.scrape()
+
+    with open('result.json', 'w') as fp:
+        json.dump(mars_dict, fp, default=json_util.default)
 
     #update the mongo database using update and upsert=True
     mongo.db.collection.update({}, mars_dict, upsert=True)
