@@ -1,6 +1,6 @@
 import scrape_mars
 from flask import Flask, render_template, redirect
-from flask_pymongo import PyMongo
+# from flask_pymongo import PyMongo
 import os
 import json
 from bson import json_util
