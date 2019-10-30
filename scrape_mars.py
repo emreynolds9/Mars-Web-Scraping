@@ -16,7 +16,8 @@ def init_browser():
 # return one Python dictionary containing all of the scraped data
 
 def scrape():
-    date_time = datetime.datetime.now()
+    now = datetime.datetime.now()
+    date_time=now.strftime("%A, %B %d %Y %I:%m%p %Z")
     browser = init_browser()
     mars_dict = {}
 
@@ -75,7 +76,7 @@ def scrape():
     "mars_weather":mars_weather,
     "html_table":html_table,
     "hemisphere_data":hemisphere_data,
-    "date_time":date_time,}
+    "date_time":date_time}
 
     browser.close
 
