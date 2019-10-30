@@ -4,6 +4,7 @@ certifi==2019.9.11
 chardet==3.0.4
 citipy==0.0.5
 Click==7.0
+datetime
 Flask==1.0.3
 gunicorn
 idna==2.8
@@ -16,5 +17,6 @@ selenium==3.141.0
 six==1.12.0
 soupsieve==1.9.3
 splinter==0.11.0
+pandas
 urllib3==1.25.5
 Werkzeug==0.15.4
