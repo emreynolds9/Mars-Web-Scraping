@@ -26,7 +26,7 @@ def scrape():
     html=browser.html
     soup_news = bs(html,'html.parser')
     #Title
-    news_title =soup_news.find('div',class_="image_and_description_container").find('h3').text
+    news_title = soup_news.find('div',class_="content_title").find('a').get_text(strip=True)
     #Image
     news_img = soup_news.find('div',class_="list_image").find('img')['src']
     news_img = "https://mars.nasa.gov"+news_img
@@ -44,9 +44,9 @@ def scrape():
     feat_img_url=browser.find_element_by_class_name('fancybox-image').get_attribute('src')
     browser.close()
 
-    url_twitter = 'https://twitter.com/marswxreport?lang=en'
-    soup_twitter = bs(requests.get(url_twitter).text,'html.parser')
-    mars_weather = soup_twitter.find('div',class_="js-tweet-text-container").find('p').get_text(strip=True)
+    # url_twitter = 'https://twitter.com/marswxreport?lang=en'
+    # soup_twitter = bs(requests.get(url_twitter).text,'html.parser')
+    # mars_weather = soup_twitter.find('div',class_="js-tweet-text-container").find('p').get_text(strip=True)
 
     url_facts = 'https://space-facts.com/mars'
     tables = pd.read_html(url_facts)
@@ -73,7 +73,7 @@ def scrape():
     "news_img":news_img,
     "news_date":news_date,
     "feat_img_url":feat_img_url,
-    "mars_weather":mars_weather,
+    # "mars_weather":mars_weather,
     "html_table":html_table,
     "hemisphere_data":hemisphere_data,
     "date_time":date_time}
