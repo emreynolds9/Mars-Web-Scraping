@@ -28,7 +28,8 @@ def scrape():
     #Title
     news_title = soup_news.find('div',class_="content_title").find('a').get_text(strip=True)
     #Image
-    news_img="https://mars.nasa.gov"+soup_news.find('img',class_="img-lazy")["data-lazy"]
+    news_img = soup_news.find('div',class_="content_title")
+    news_img = "https://mars.nasa.gov"+soup_news.find('img',class_="img-lazy")["data-lazy"]
 
     #Date
     news_date = soup_news.find('div',class_="image_and_description_container").find('div',class_='list_date').text
@@ -76,8 +77,7 @@ def scrape():
     "feat_img_url":feat_img_url,
     # "mars_weather":mars_weather,
     "html_table":html_table,
-    "hemisphere_data":hemisphere_data,
-    "date_time":date_time}
+    "hemisphere_data":hemisphere_data}
 
     browser.close
 
