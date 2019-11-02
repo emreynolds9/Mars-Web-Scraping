@@ -28,8 +28,8 @@ def scrape():
     #Title
     news_title = soup_news.find('div',class_="content_title").find('a').get_text(strip=True)
     #Image
-    news_img = soup_news.find('div',class_="list_image").find('img')['src']
-    news_img = "https://mars.nasa.gov"+news_img
+    news_img="https://mars.nasa.gov"+soup_news.find('img',class_="img-lazy")["data-lazy"]
+
     #Date
     news_date = soup_news.find('div',class_="image_and_description_container").find('div',class_='list_date').text
     #Paragraph Text
@@ -68,6 +68,7 @@ def scrape():
         hemisphere_data.append({"title":title,"img_url":img_url})
 
     mars_dict = {
+    "date_time":date_time,
     "news_title": news_title,
     "news_p":news_p,
     "news_img":news_img,
