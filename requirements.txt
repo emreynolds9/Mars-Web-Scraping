@@ -9,7 +9,7 @@ Flask==1.0.3
 idna==2.8
 itsdangerous==1.1.0
 gunicorn
-Jinja2==2.10.1
+Jinja2==2.11.3
 kdtree==0.16
 MarkupSafe==1.1.1
 pandas
